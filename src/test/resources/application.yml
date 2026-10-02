@@ -1,0 +1,27 @@
+# Test / measurement profile: an in-memory H2 database in PostgreSQL compatibility mode. No real
+# PostgreSQL server is reachable in this build environment, so every number in the README was
+# measured against this profile, the same convention the sibling repositories in this portfolio
+# (account-information-multi-format-api, trading-partner-integration-gateway) already use.
+spring:
+  datasource:
+    url: jdbc:h2:mem:regfiling;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+    open-in-view: false
+
+server:
+  port: 0
+
+logging:
+  level:
+    com.manas.regfiling: INFO

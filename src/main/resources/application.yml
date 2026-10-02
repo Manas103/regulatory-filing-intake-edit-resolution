@@ -1,0 +1,26 @@
+# Production profile: a real PostgreSQL connection string. No PostgreSQL server is reachable in
+# the environment this project was built in, so nothing in this repository's README or docs/ was
+# measured against this profile. Every measured number ran against
+# src/test/resources/application.yml (H2 in PostgreSQL compatibility mode) instead, the same
+# convention used by the sibling repos account-information-multi-format-api and
+# trading-partner-integration-gateway. See the README's honest framing section.
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/regulatory_filing_intake
+    driver-class-name: org.postgresql.Driver
+    username: regfiling
+    password: change-me
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.manas.regfiling: INFO
